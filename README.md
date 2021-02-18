@@ -1,4 +1,4 @@
-[GithubPage](https://wangxl12.github.io/OnlineTest-System/)
+## Switch to: [GithubPage](https://wangxl12.github.io/OnlineTest-System/)
 # OnlineTest-System
 <font face="楷体" size=4>使用Django开发简单的在线习题测试系统，系统角色为学生和教师，习题类型有单选题、多选题、填空题，教师可在线录入或以文件方式上传试题。系统还扩展签到、在线搜题、数据统计等功能（不完善，有未解决的Bug），由于时间关系无法进一步将上述功能进行完善，但是预留了功能扩展接口，便于开发人员根据自己的需要进行功能的优化。</font>
 
