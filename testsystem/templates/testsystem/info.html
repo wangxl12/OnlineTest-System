@@ -1,0 +1,84 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <title> 主界面 </title>
+    <link rel="shortcut icon" href="{% static 'login/favicon.ico' %}"> <link href="{% static 'login/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'login/css/font-awesome.css' %}" rel="stylesheet">
+    <link href="{% static 'login/css/animate.css' %}" rel="stylesheet">
+    <link href="{% static 'login/css/style.css' %}" rel="stylesheet">
+</head>
+
+<body class="gray-bg">
+    <div class="wrapper wrapper-content  animated fadeInRight">
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="ibox ">
+                    <div class="ibox-content">
+                        <div class="tab-content">
+                            <div id="contact-1" class="tab-pane active">
+                                <div class="row m-b-lg">
+                                    <div class="col-lg-4 text-center">
+                                        <h2>{{ request.session.user_name }}</h2>
+                                        <div class="m-b-sm">
+                                            <img alt="image" class="img-circle" src="{% static 'login/image/student.jpg' %}" style="width: 54px">
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-lg-8">
+                                        <h1>
+                                            个人简介
+                                        </h1><br>
+                                        <h4>
+                                            姓名：{{ request.session.user_name }}
+                                        </h4><br>
+                                        <h4>
+                                            学号：{{ request.session.user_idcard }}
+                                        </h4><br>
+                                    </div>
+                                </div>
+                                <div class="client-detail">
+                                    <div class="full-height-scroll">
+                                        <br><br><br><br><br><br><br>
+                                        <strong>显示成绩</strong>
+                                            <ul class="list-group clear-list">
+                                                {% for score in score_list %}
+                                                <li class="list-group-item fist-item">
+                                                    <span class="pull-right"> {{score.score}}</span> {{score.paper_id}}
+                                                </li>
+                                                {% endfor %}
+                                            </ul>
+                                        <hr/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <div align="right" style="position:relative;top:0px;">
+            <a href="/logout/">
+                <button type="button" class="btn btn-primary btn-rounded">返回</button>
+            </a>
+        </div>
+        </div>
+    </div>
+    <!-- 全局js -->
+    <script src="{% static 'login/js/jquery.min.js' %}"></script>
+    <script src="{% static 'login/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'login/js/plugins/slimscroll/jquery.slimscroll.min.js' %}"></script>
+    <!-- 自定义js -->
+    <script src="{% static 'login/js/content.js' %}"></script>
+    <script>
+        $(function () {
+            $('.full-height-scroll').slimScroll({
+                height: '100%'
+            });
+        });
+    </script>
+</body>
+</html>

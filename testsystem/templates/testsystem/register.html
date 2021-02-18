@@ -1,0 +1,88 @@
+{% load static %}
+{% load i18n static simpletags %}
+<!doctype html>
+<html lang="en">
+	<head>
+		<!-- Required meta tags -->
+		<meta charset="utf-8">
+		<meta name="renderer" content="webkit">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<title>注册</title>
+		<meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" name="viewport">
+		<link rel="stylesheet" href="{% static 'cdnjs/twitter-bootstrap/3.3.7/css/bootstrap.min.css' %}">
+		<link rel="stylesheet" href="{% static 'cdnjs/font-awesome/4.7.0/css/font-awesome.min.css' %}">
+		<link rel="stylesheet" href="{% static 'cdnjs/admin-lte/2.4.8/css/AdminLTE.min.css' %}">
+		<script src="{% static 'cdnjs/jquery/3.5.0/jquery.min.js' %}"></script>
+		<script src="{% static 'cdnjs/twitter-bootstrap/3.3.7/js/bootstrap.min.js' %}"></script>
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+	</head>
+
+    <body class="hold-transition login-page" style="overflow-y:hidden">
+		<div class="login-box">
+			<form class="form-register" action="/register/" method="post">
+			{% block logo %}
+			{% endblock %}
+			{% block header %}
+				<div class="header">{{ site_header }}</div>
+			{% endblock %}
+			<div class="login-logo">
+				<a href="#" style="color:#32779f"><b>新用户</b>注册</a>
+			</div>
+			<div class="login-box-body text-center">
+				<!-- <div class="col"> -->
+				{% if register_form.captcha.errors %}
+					<div class="alert alert-warning">{{ register_form.captcha.errors }}</div>
+				{% elif message %}
+					<div class="alert alert-warning">{{ message }}</div>
+				{% endif %}
+				{% csrf_token %}
+				<!-- <h3 class="text-center">新用户注册</h3> -->
+				<div class="form-group">
+					{{ register_form.username.label_tag }}
+					<!-- {{ register_form.username}} -->
+					<input type="text" name='username' class="form-control" id="username" placeholder="姓名" autofocus required>
+					<span class="glyphicon glyphicon-user form-control-feedback"></span> 
+				</div>
+				<div class="form-group">
+					{{ register_form.idcard.label_tag }}
+					<!-- {{ register_form.idcard}} -->
+					<input type="text" name='idcard' class="form-control" id="id_idcard" placeholder="学号" autofocus required>
+					<span class="glyphicon glyphicon-user form-control-feedback"></span> 
+				</div>
+				<div class="form-group">
+					{{ register_form.password1.label_tag }}
+					<!-- {{ register_form.password1 }} -->
+					<input type="password" name='password1' class="form-control" id="id_pwd1" placeholder="密码" autofocus required>
+					<span class="glyphicon glyphicon-user form-control-feedback"></span>
+				</div>
+				<div class="form-group">
+					{{ register_form.password2.label_tag }}
+					<!-- {{ register_form.password2 }} -->
+					<input type="password" name='password2' class="form-control" id="id_pwd2" placeholder="确认密码" autofocus required>
+					<span class="glyphicon glyphicon-user form-control-feedback"></span>
+				</div>
+				<div class="form-group">
+					{{ register_form.email.label_tag }}
+					<!-- {{ register_form.email }} -->
+					<input type="text" name='email' class="form-control" id="email" placeholder="邮箱地址" autofocus required>
+					<span class="glyphicon glyphicon-user form-control-feedback"></span>
+				</div>
+				<div class="form-group">
+					{{ register_form.sex.label_tag }}
+					{{ register_form.sex }}
+					<!-- <input type="text" name='sex' class="form-control" id="sex" placeholder="性别" autofocus required>
+					<span class="glyphicon glyphicon-user form-control-feedback"></span> -->
+				</div>
+				<div>
+					<button type="submit" class="btn btn-primary btn-block btn-flat J_menuItem">注册</button><br>
+					<a href="/login/"  ><ins>直接登录</ins></a>
+				</div>
+					<!-- </div> col> -->
+			</div> <!-- /container -->
+		</form>
+	</div> <!---/login box-->>
+	{% include 'admin/includes/js-part.html' %}
+	<script type="text/javascript" src="{% static '/admin/simpleui-x/js/login.js' %}?_=3.3"></script>
+</body>
+</html>

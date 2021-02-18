@@ -1,0 +1,207 @@
+{% load static %}
+{% load i18n static simpletags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <title> 主界面 </title>
+    <link rel="shortcut icon" href="{% static 'login/favicon.ico' %}"> <link href="{% static 'login/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'login/css/animate.css' %}" rel="stylesheet">
+    <link href="{% static 'login/css/style.css' %}" rel="stylesheet">
+    <meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" name="viewport">
+    <link rel="stylesheet" href="{% static 'cdnjs/twitter-bootstrap/3.3.7/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'cdnjs/font-awesome/4.7.0/css/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'cdnjs/admin-lte/2.4.8/css/AdminLTE.min.css' %}">
+    <script src="{% static 'cdnjs/jquery/3.5.0/jquery.min.js' %}"></script>
+    <script src="{% static 'cdnjs/twitter-bootstrap/3.3.7/js/bootstrap.min.js' %}"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+</head>
+
+<body class="hold-transition login-page" style="overflow-y:hidden">
+    <div class="wrapper wrapper-content  animated fadeInRight">
+        <div class="row">
+            <div align="right" style="position:relative;top:0px">
+                <a href="/logout/">
+                    <button type="button" class="btn btn-primary btn-rounded">退出登录</button>
+                </a>
+            </div>
+                <div class="col-sm-4">
+                    <div class="ibox ">
+                        <div class="ibox-content">
+                            <div class="tab-content">
+                                <div id="contact-1" class="tab-pane active">
+                                    <div class="row m-b-lg">
+                                        <div class="col-lg-4 text-center">
+                                            <h2 href="#" style="color:#32779f">{{ request.session.user_name }}</h2>
+                                            <div class="m-b-sm">
+                                                <img alt="image" class="img-circle" src="{% static 'login/image/student.jpg' %}" style="width: 180px">
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="col-lg-8">
+                                            <h1 href="#" style="color:#32779f">
+                                                个人信息
+                                            </h1><br>
+                                            <h4 href="#" style="color:#32779f">
+                                                姓名：{{ request.session.user_name }}
+                                            </h4><br>
+                                            <h4 href="#" style="color:#32779f">
+                                                学号：{{ request.session.user_idcard }}
+                                            </h4><br>
+                                        </div>
+                                    </div>
+                                    <div class="client-detail">
+                                        <div class="full-height-scroll">
+                                            <br><br><br><br><br><br><br>
+                                            <div>
+                                                <a href="/brokenline/">
+                                                    <button type="button" class="btn btn-primary btn-rounded" style="position:relative;top:0px">折线成绩分析</button>
+                                                </a>
+                                                <a href="/histogram/">
+                                                    <button type="button" class="btn btn-primary btn-rounded" style="position:relative;top:0px">柱状图成绩分析</button>
+                                                </a>
+                                                <a href="/pie/">
+                                                    <button type="button" class="btn btn-primary btn-rounded" style="position:relative;top:0px">饼状图成绩分析</button>
+                                                </a>
+                                            </div>
+                                            
+                                            <br><br><br>
+                                            <strong href="#" style="color:#32779f">测试分数</strong>
+												<ul class="list-group clear-list" href="#" style="color:#32779f">
+													{% for score in score_list %}
+													<li class="list-group-item fist-item">
+														<span class="pull-right" href="#" style="color:#32779f"> {{score.score}}</span> {{score.paper_id}}
+													</li>
+													{% endfor %}
+												</ul>
+                                            <hr/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <div class="col-sm-8">
+                <div class="ibox">
+                    <div class="ibox-content">
+                        <span class="text-muted small pull-right" href="#" style="color:#32779f">最后更新：<i class="fa fa-clock-o"></i>{% now "Y-m-d H:i" %}</span>
+                        <h2 href="#" style="color:#32779f">首页</h2>
+                        <div class="input-group">
+                            <input type="text" placeholder="查找试卷" class="input form-control">
+                            <span class="input-group-btn">
+                                        <button type="button" class="btn btn btn-primary"> <i class="fa fa-search"></i> 搜索</button>
+                                </span>
+                        </div>
+                        <div class="clients-list">
+                            <ul class="nav nav-tabs" >
+                                <span class="pull-right small text-muted" href="#" style="color:#32779f">老师发布了{{paper_count}}份试卷</span>
+                                <br>
+                                <span class="pull-right small text-muted" href="#" style="color:#32779f">老师发布了{{checkininfo_count}}次签到任务</span>
+                                <li class="active"><a data-toggle="tab" href="#tab-1"> 未完成试卷</a>
+                                </li>
+                                <li class=""><a data-toggle="tab" href="#tab-2"> 已完成试卷</a>
+                                </li>
+                                <li class="active"><a data-toggle="tab" href="#tab-3"> 未完成签到</a>
+                                </li>
+                                <li class=""><a data-toggle="tab" href="#tab-4"> 已完成签到</a>
+                                </li>
+                            </ul>
+                            <!--未完成试卷-->
+                            <div class="tab-content">
+                                <div id="tab-1" class="tab-pane active">
+                                    <div class="full-height-scroll">
+                                        <div class="table-responsive">
+                                            <table class="table table-striped table-hover">
+                                                <tbody>
+                                                    {% for paper in paper_nofinish %}
+                                                    <tr>
+                                                        <td class="client-avatar"><img alt="image" src="{% static 'login/image/paper.jpg' %}"> </td>
+                                                        <td><a href="{% url 'testsystem:paper' paper.id %}">{{paper.paper_text}}</a></td>
+                                                        <td > 发布时间{{paper.pub_date}}</td>
+                                                    </tr>
+                                                    {% endfor %}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--已完成试卷-->
+                                <div id="tab-2" class="tab-pane">
+                                    <div class="full-height-scroll">
+                                        <div class="table-responsive">
+                                            <table class="table table-striped table-hover">
+                                                <tbody>
+                                                    {% for paper in score_list %}
+                                                    <tr>
+                                                        <td class="client-avatar"><img alt="image" src="{% static 'login/image/paper.jpg' %}"> </td>
+                                                        <td><a href="{% url 'testsystem:paper' paper.paper_id.id %}">{{paper.paper_id.paper_text}}</a></td>
+                                                        <td> 发布时间：{{paper.paper_id.pub_date}}</td>    
+                                                    </tr>
+                                                    {% endfor %}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--未完成签到-->
+                                <div id="tab-3" class="tab-pane active">
+                                    <div class="full-height-scroll">
+                                        <div class="table-responsive">
+                                            <table class="table table-striped table-hover">
+                                                <tbody>
+                                                    {% for checkin in checkin_nofinish %}
+                                                    <tr>
+                                                        <td class="client-avatar"><img alt="image" src="{% static 'login/image/paper.jpg' %}"> </td>
+                                                        <td><a href="/checkin/">第{{checkin.id}}次课堂签到</a></td>
+                                                        <td> 发布时间{{checkin.date}}</td>    
+                                                    </tr>
+                                                    {% endfor %}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--已完成签到-->
+                                <div id="tab-4" class="tab-pane">
+                                    <div class="full-height-scroll">
+                                        <div class="table-responsive">
+                                            <table class="table table-striped table-hover">
+                                                <tbody>
+                                                    {% for checkin in checkin_finish %}
+                                                    <tr>
+                                                        <td class="client-avatar"><img alt="image" src="{% static 'login/image/paper.jpg' %}"> </td>
+                                                        <td><a href="/checkin/">第{{checkin.id}}次课堂签到</a></td>
+                                                        <td> 发布时间{{checkin.date}}</td>    
+                                                    </tr>
+                                                    {% endfor %}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 全局js -->
+    <script src="{% static 'login/js/jquery.min.js' %}"></script>
+    <script src="{% static 'login/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'login/js/plugins/slimscroll/jquery.slimscroll.min.js' %}"></script>
+    <!-- 自定义js -->
+    <script src="{% static 'login/js/content.js' %}"></script>
+    <script>
+        $(function () {
+            $('.full-height-scroll').slimScroll({
+                height: '100%'
+            });
+        });
+    </script>
+</body>
+</html>
